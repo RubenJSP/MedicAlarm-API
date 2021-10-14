@@ -17,7 +17,17 @@ class UserController extends Controller
      */
     public function index()
     {
-
+        return User::all();
+    }
+    /**
+     * Display the specified resource.
+     *
+     * @param   id  $patient
+     * @return \Illuminate\Http\Response
+     */
+    public function show($code)
+    {
+        $patient = User::where('code',$code)->firts();
     }
 
     /**
@@ -30,8 +40,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'max:255'],
-            'lastname' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'min:3','max:255','regex:/[A-Za-z]+/'],
+            'lastname' => ['required', 'string', 'min:3','max:255','regex:/[A-Za-z]+/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string','min:8' ,'max:32'],
             'phone' => ['required','regex:/^\d{10}$/','unique:users'],
@@ -49,7 +59,7 @@ class UserController extends Controller
             }
             else{
                 $user->assignRole('Patient');
-                $user['code'] = strtoupper(substr(hash('sha256',$user['id']),0,5));
+                $user['code'] = strtoupper(substr($user['name'],0,3).substr($user['lastname'],0,2)."-".substr(hash('sha256',$user['id']),0,5));
             }
 
             $user->password =  Hash::make($request['password']);
@@ -71,16 +81,18 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        
         $validator = Validator::make($request->all(), [
-            'name' => ['sometimes', 'string', 'max:50'],
-            'lastname' => ['sometimes', 'string', 'max:50'],
+            'name' => ['sometimes', 'string', 'min:3','max:50', 'regex:/[A-Za-z]+/'],
+            'lastname' => ['sometimes', 'string', 'min:3','max:50','regex:/[A-Za-z]+/'],
             'email' => ['sometimes', 'string', 'email', 'max:32', 'unique:users'],
             'password' => ['sometimes','required','string','min:8' ,'max:32'],
             'phone' => ['sometimes','required','regex:/^\d{10}$/','unique:users'],
-            'speciality' => ['sometimes', 'string','min:4','max:50'],
+            'speciality' => ['sometimes', 'string','min:4','max:50','regex:/[A-Za-z]+/'],
             'professional_id' => ['sometimes','string','min:3','max:20','unique:users'],
         ]);
+        if ($validator->fails())
+            return response()->json(['data' => $validator->errors()], 401);
+
         if($request->has('password'))
             $request['password'] = Hash::make($request['password']); 
 
@@ -89,9 +101,14 @@ class UserController extends Controller
 
         if ($validator->fails())
             return response()->json(['data' => $validator->errors()], 401);
+        if(User::find(Auth::user()->id)->update($request->all())){
+            $updated = User::find(Auth::user()->id);
+            return response()->json([
+                'message' => 'Ha actualizado su información.',
+                'data' => $updated
+            ], 200);
 
-        if(User::find(Auth::user()->id)->update($request->all()))
-            return response()->json(['message' => 'Ha actualizado su información.'], 200);
+        }
 
         return response()->json(['message' => 'No se ha actualizado la información, intente nuevamente.'], 401);
         
@@ -109,7 +126,7 @@ class UserController extends Controller
         if($user->delete())
             return response()->json(['message' => 'Ha eliminado su cuenta'], 200);
         
-        return response()->json(['message' => 'No se ha podido eliminar la cuenta, intente nuevamente'], 200);
+        return response()->json(['message' => 'No se ha podido eliminar la cuenta, intente nuevamente'], 401);
         
     }
 }

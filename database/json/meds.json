@@ -1,0 +1,662 @@
+[
+    {
+      "name": "EPCLUSA",
+      "via": "ORAL"
+    },
+    {
+      "name": "PROFENID  COMPRIMIDOS ENTERICOS 100 MG",
+      "via": "ORAL"
+    },
+    {
+      "name": "DEPO-MEDROL 40 MG / MLSUSPENSIONINYECTABLEX 5 ML",
+      "via": "INTRALESIONAL"
+    },
+    {
+      "name": "FLOLAN INYECTABLE 1.5 MG",
+      "via": "INTRAVENOSA"
+    },
+    {
+      "name": "ZITAT",
+      "via": "INTRAVENOSA"
+    },
+    {
+      "name": "CYTIL FAST",
+      "via": "ORAL"
+    },
+    {
+      "name": "AEROVIAL CAPSULA DURA PARA ADMINISTRAR POR INHALADOR",
+      "via": "INHALACION"
+    },
+    {
+      "name": "GAVISCON DOBLE ACCION LIQUIDO SACHET",
+      "via": "ORAL"
+    },
+    {
+      "name": "FUROSEMIDA INYECTABLE 20 MG / 2 ML",
+      "via": "INTRAVENOSA"
+    },
+    {
+      "name": "HIDRAPLUS 45 CON ZINC",
+      "via": "ORAL"
+    },
+    {
+      "name": "NORAVER NOCHE",
+      "via": "ORAL"
+    },
+    {
+      "name": "NORAVER NOCHE",
+      "via": "ORAL"
+    },
+    {
+      "name": "HIDRAPLUS 45 CON ZINC",
+      "via": "ORAL"
+    },
+    {
+      "name": "DIANEAL PD- 2 CON DEXTROSAAL 2.5%",
+      "via": "INTRAPERITONEAL"
+    },
+    {
+      "name": "ACTIONFLU 500/50 MCG",
+      "via": "INHALACION"
+    },
+    {
+      "name": "NOFERTYL INYECTABLE",
+      "via": "INTRAMUSCULAR"
+    },
+    {
+      "name": "EPNONE 50 TABLETA RECUBIERTA",
+      "via": "ORAL"
+    },
+    {
+      "name": "NENEDENT GOTAS",
+      "via": "BUCAL"
+    },
+    {
+      "name": "CAPD/DPCA 3 SOLUCION ESTERIL PARA DIALISIS PERITONEAL",
+      "via": "INTRAPERITONEAL"
+    },
+    {
+      "name": "RENITEC 5 MG TABLETAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "ALACIR 60",
+      "via": "ORAL"
+    },
+    {
+      "name": "SAL DE FRUTAS LUA PLUS",
+      "via": "ORAL"
+    },
+    {
+      "name": "XALKORI 200MG CAPSULAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "NEOSALDINA GRAGEAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "N - ACETIL CISTEINA 600MG",
+      "via": "ORAL"
+    },
+    {
+      "name": "VALSARTAN160 MGTABLETA RECUBIERTA",
+      "via": "ORAL"
+    },
+    {
+      "name": "SEVEDOL",
+      "via": "ORAL"
+    },
+    {
+      "name": "MAXTIME GEL",
+      "via": "TOPICA (EXTERNA)"
+    },
+    {
+      "name": "SYNFLORIX  VACUNA",
+      "via": "INTRAMUSCULAR"
+    },
+    {
+      "name": "OXIGENO MEDICINAL GAS Y LIQUIDO",
+      "via": "INHALACION"
+    },
+    {
+      "name": "SERECOR FORTE DPI 500",
+      "via": "INHALACION"
+    },
+    {
+      "name": "HUMIRA AC",
+      "via": "SUBCUTANEA"
+    },
+    {
+      "name": "AMIGARD 5 TABLETAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "VITAMINA K1 SOLUCION INYECTABLE",
+      "via": "INTRAVENOSA"
+    },
+    {
+      "name": "CLINDAMICINA300 MG CAPSULAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "ROTAVIN 40 MG TABLETAS RECUBIERTAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "SOLHIDREX",
+      "via": "ORAL"
+    },
+    {
+      "name": "BETAMETASONA DIPROPIONATO+BETAMETASONA FOSFATO DISODICO",
+      "via": "INTRAMUSCULAR"
+    },
+    {
+      "name": "EPAMIN 100 MG CAPSULAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "CARDIOCAP 80",
+      "via": "ORAL"
+    },
+    {
+      "name": "SERECOR FORTE DPI 100",
+      "via": "INHALACION"
+    },
+    {
+      "name": "TEVETEN PLUS TABLETAS RECUBIERTAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "GYNOTRAN OVULO",
+      "via": "VAGINAL"
+    },
+    {
+      "name": "FEXOFENADINA 180 MG",
+      "via": "ORAL"
+    },
+    {
+      "name": "FENTANILO SOLUCION INYECTABLE 0.5 MG/ 10 ML",
+      "via": "INTRAMUSCULAR"
+    },
+    {
+      "name": "GLEMONT L TABLETAS RECUBIERTAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "ENBREL 25 MG SOLUCION PARA INYECCION",
+      "via": "SUBCUTANEA"
+    },
+    {
+      "name": "MEBUCAINA FORTE",
+      "via": "BUCAL"
+    },
+    {
+      "name": "COLIK FORTE TABLETAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "UNITEZO 3.5 POLVO LIOFILIZADO PARA RECONSTITUIR A SOLUCION INYECTABLE",
+      "via": "SUBCUTANEA"
+    },
+    {
+      "name": "GEMCITABINA CLORHIDRATO POLVO LIOFILIZADO PARA RECONSTITUIR A SOLUCION INYECTABLE",
+      "via": "INTRAVENOSA"
+    },
+    {
+      "name": "HIDROXICLOROQUINA 400 MG TABLETA",
+      "via": "ORAL"
+    },
+    {
+      "name": "TAFLAX GRIP",
+      "via": "ORAL"
+    },
+    {
+      "name": "ACETAMINOFEN/CODEINA 325 MG/30 MG",
+      "via": "ORAL"
+    },
+    {
+      "name": "SYNTHROID 88 MCG",
+      "via": "ORAL"
+    },
+    {
+      "name": "ACTIONFLU 250/50 MCG",
+      "via": "INHALACION"
+    },
+    {
+      "name": "LOPID 900 MG TABLETAS RECUBIERTAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "OMEPRAZOL 20 MG CAPSULAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "INVICTUS 20 MG TABLETAS RECUBIERTAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "ERITROMAX LIOFILIZADO 4000 U.I.",
+      "via": "INTRAVENOSA"
+    },
+    {
+      "name": "TAFLAXFORTE TABLETAS RECUBIERTAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "CLAVUTEC  TABLETAS RECUBIERTAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "COTASAR PLUS 100/12.5 TABLETAS RECUBIERTAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "ALDACTONE TABLETAS 25 MG",
+      "via": "ORAL"
+    },
+    {
+      "name": "PRIMENE 10%",
+      "via": "INTRAVENOSA"
+    },
+    {
+      "name": "HIDRAPLUS 45 CON ZINC",
+      "via": "ORAL"
+    },
+    {
+      "name": "CLINDAMICINA600 MG /4ML",
+      "via": "INTRAVENOSA"
+    },
+    {
+      "name": "BROMURO DE OTILONIO 40 MG",
+      "via": "ORAL"
+    },
+    {
+      "name": "CEFALOTINA 1G POLVO SOLUCION INYECTABLE.",
+      "via": "INTRAMUSCULAR"
+    },
+    {
+      "name": "TEVETEN PLUS TABLETAS RECUBIERTAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "ACETAMINOFEN / TRAMADOL CLORHIDRATO TABLETAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "TAFLAX GRIP",
+      "via": "ORAL"
+    },
+    {
+      "name": "GARMISCH ROSUVAX  20MG TABLETAS.",
+      "via": "ORAL"
+    },
+    {
+      "name": "ELECTROLIT",
+      "via": "ORAL"
+    },
+    {
+      "name": "AZITROMICINA 200MG/5ML POLVO PARA RECONSTITUIR A SUSPENSION ORAL",
+      "via": "ORAL"
+    },
+    {
+      "name": "EZETIMIBA 10MG + SIMVASTATINA 40MG",
+      "via": "ORAL"
+    },
+    {
+      "name": "PNEUMOVAX  23 (VACUNA PNEUMOCOCO POLIVALENTE)",
+      "via": "INTRAMUSCULAR"
+    },
+    {
+      "name": "LOSARTEN 100 MG",
+      "via": "ORAL"
+    },
+    {
+      "name": "CURAM  600POLVO PARA SUSPENSION ORAL",
+      "via": "ORAL"
+    },
+    {
+      "name": "XEOMINLD5050UNIDADES",
+      "via": "INTRAMUSCULAR"
+    },
+    {
+      "name": "APROVASC 300MG/5MG",
+      "via": "ORAL"
+    },
+    {
+      "name": "GYNOPLUS OVULOS",
+      "via": "VAGINAL"
+    },
+    {
+      "name": "LUPROLYK SOLUCION OFTALMICA",
+      "via": "OFT�LMICA"
+    },
+    {
+      "name": "METFORMINA 500 MG + GLIBENCLAMIDA 5 MG",
+      "via": "ORAL"
+    },
+    {
+      "name": "N- ACETILCISTEINA 200 MG GRANULADO PARA RECONSTITUIR A SOLUCION ORAL SABOR A NARANJA.",
+      "via": "ORAL"
+    },
+    {
+      "name": "DALACIN C 300 MG CAPSULAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "IBUPROFENO TABLETAS RECUBIERTAS 800 MG",
+      "via": "ORAL"
+    },
+    {
+      "name": "EXFORGE 5/160 MG COMPRIMIDOS CON CUBIERTA PELICULAR",
+      "via": "ORAL"
+    },
+    {
+      "name": "TAFLAX GRIP",
+      "via": "ORAL"
+    },
+    {
+      "name": "ALBUREX 25/100 ML",
+      "via": "INTRAVENOSA"
+    },
+    {
+      "name": "OXIGENO MEDICINAL.",
+      "via": "INHALACION"
+    },
+    {
+      "name": "NORAVER NF DIA",
+      "via": "ORAL"
+    },
+    {
+      "name": "CAPIIBINE 500 MG TABLETAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "ALACIR 30",
+      "via": "ORAL"
+    },
+    {
+      "name": "DUOTRAV SOLUCION OFTALMICA",
+      "via": "CONJUNTIVAL"
+    },
+    {
+      "name": "DIMETAPP GRIPA CAPSULAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "ESCITAVITAE 10MG TABLETAS RECUBIERTAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "FIRAZYR",
+      "via": "SUBCUTANEA"
+    },
+    {
+      "name": "DIANEAL PD- 2 CON DEXTROSAAL 2.5%",
+      "via": "INTRAPERITONEAL"
+    },
+    {
+      "name": "PENTAXIM",
+      "via": "INTRAMUSCULAR"
+    },
+    {
+      "name": "SAL DE FRUTAS LUA PLUS",
+      "via": "ORAL"
+    },
+    {
+      "name": "MOVIDOL",
+      "via": "ORAL"
+    },
+    {
+      "name": "XALAR  4 MG SACHET",
+      "via": "ORAL"
+    },
+    {
+      "name": "MONIDEM 0.5% GEL",
+      "via": "TOPICA (EXTERNA)"
+    },
+    {
+      "name": "AIRE MEDICINAL COMPRIMIDO",
+      "via": "INHALACION"
+    },
+    {
+      "name": "UNASYN TABLETAS 750 MG",
+      "via": "ORAL"
+    },
+    {
+      "name": "JANUMET 50/1000 MG TABLETAS RECUBIERTAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "TRAMADOL GOTAS 100 MG/ML",
+      "via": "ORAL"
+    },
+    {
+      "name": "SMOFLIPID 20%",
+      "via": "INTRAVENOSA"
+    },
+    {
+      "name": "PURELL ADVANCED HAND SANITIZER GEL",
+      "via": "TOPICA (EXTERNA)"
+    },
+    {
+      "name": "VEDIPAL COMPRIMIDOS RECUBIERTOS",
+      "via": "ORAL"
+    },
+    {
+      "name": "PALEXIS  50 MG.",
+      "via": "ORAL"
+    },
+    {
+      "name": "TRIFOLIOM CAPSULA",
+      "via": "ORAL"
+    },
+    {
+      "name": "DOLEX AVANZADO",
+      "via": "ORAL"
+    },
+    {
+      "name": "DOVIR  TABLETAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "CARDIOCAP 80",
+      "via": "ORAL"
+    },
+    {
+      "name": "ATORVASTATINA TABLETAS RECUBIERTAS 20 MG",
+      "via": "ORAL"
+    },
+    {
+      "name": "HIDRANTA 30 MEQ SOLUCION ELECTROLITICA",
+      "via": "ORAL"
+    },
+    {
+      "name": "BETASERC  16 MG TABLETA",
+      "via": "ORAL"
+    },
+    {
+      "name": "MIDAZOLAM 5MG/5ML SOLUCION INYECTABLE",
+      "via": "INTRAMUSCULAR"
+    },
+    {
+      "name": "JANUMET 50/1000 MG TABLETAS RECUBIERTAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "HIDRAPLUS 45 CON ZINC",
+      "via": "ORAL"
+    },
+    {
+      "name": "INFANRIX HEXA (DPTA - HEPB - IPV - HIB).",
+      "via": "INTRAMUSCULAR"
+    },
+    {
+      "name": "LACTATO DE RINGER SOLUCION INYECTABLE (SOLUCION HARTMANN)",
+      "via": "IRRIGACI�N"
+    },
+    {
+      "name": "CLINDAMICINA / CLOTRIMAZOL 100MG/200MG",
+      "via": "VAGINAL"
+    },
+    {
+      "name": "SERECOR FORTE DPI 100",
+      "via": "INHALACION"
+    },
+    {
+      "name": "TRALEX",
+      "via": "ORAL"
+    },
+    {
+      "name": "ROZELAIC GEL",
+      "via": "TOPICA (EXTERNA)"
+    },
+    {
+      "name": "NUMETA G 19% E",
+      "via": "INTRAVENOSA"
+    },
+    {
+      "name": "TEMIFORCE 80 MG TABLETAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "IBUPROFENO 800 MG TABLETAS RECUBIERTAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "SYNFLORIX  VACUNA",
+      "via": "INTRAMUSCULAR"
+    },
+    {
+      "name": "NABILA 2.5 MG COMPRIMIDOS",
+      "via": "ORAL"
+    },
+    {
+      "name": "OIDOLYT GOTAS OTICAS",
+      "via": "OTICO AURICULAR"
+    },
+    {
+      "name": "DIPIRONA SODICA / ISOMETEPTENO MUCATO/CAFEINA 300 MG / 30 MG/30MG TABLETA RECUBIERTA",
+      "via": "ORAL"
+    },
+    {
+      "name": "ALACIR 30",
+      "via": "ORAL"
+    },
+    {
+      "name": "PENICILINA G SODICA 1.000.000 UI",
+      "via": "INTRAMUSCULAR"
+    },
+    {
+      "name": "GLUCONATO DE CALCIO ECAR AL 10% SOLUCION INYECTABLE",
+      "via": "INTRAVENOSA"
+    },
+    {
+      "name": "BISOPROLOL FUMARATO 10 MG TABLETAS RECUBIERTAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "VICAL TABLETAS MASTICABLES",
+      "via": "BUCAL"
+    },
+    {
+      "name": "AIROMED 5 MG TABLETAS MASTICABLES",
+      "via": "ORAL"
+    },
+    {
+      "name": "VORICONAZOL PARA INY 200 MG",
+      "via": "INTRAVENOSA"
+    },
+    {
+      "name": "MIXEL 500 MG TABLETAS RECUBIERTAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "VALACICLOVIR 500 MG",
+      "via": "ORAL"
+    },
+    {
+      "name": "ROSSFELL CAPSULAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "ACETAMINOFEN 500 MG",
+      "via": "ORAL"
+    },
+    {
+      "name": "PIRAXTEL SUSPENSION",
+      "via": "ORAL"
+    },
+    {
+      "name": "CURAM 500 MG TABLETAS CON PELICULA",
+      "via": "ORAL"
+    },
+    {
+      "name": "FIXAMICIN DOL",
+      "via": "TOPICA (EXTERNA)"
+    },
+    {
+      "name": "MEROPENEM500 MG INYECTABLE",
+      "via": "INTRAVENOSA"
+    },
+    {
+      "name": "LUVOX 100 MG TABLETAS RECUBIERTAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "LEMOVITC",
+      "via": "ORAL"
+    },
+    {
+      "name": "ROSSFELL CAPSULAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "DECAL 2000 UI",
+      "via": "ORAL"
+    },
+    {
+      "name": "UTROGESTAN 200 MG CAPSULAS",
+      "via": "VAGINAL"
+    },
+    {
+      "name": "ELECTROLIT",
+      "via": "ORAL"
+    },
+    {
+      "name": "CASPOFUNGINA 50 MG/VIAL POLVO PARA RECONSTITUIR A SOLUCION INYECTABLE",
+      "via": "INTRAVENOSA"
+    },
+    {
+      "name": "CEFEPIMA CLORHIDRATO 1G INYECTABLE.",
+      "via": "INTRAMUSCULAR"
+    },
+    {
+      "name": "NORAVER NF DIA",
+      "via": "ORAL"
+    },
+    {
+      "name": "HEXOFENTABLETA 4 MG",
+      "via": "ORAL"
+    },
+    {
+      "name": "AMPICILINA 500 MG CAPSULAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "TIAMINA 300 MG",
+      "via": "ORAL"
+    },
+    {
+      "name": "NORAVER G FAST TOTAL",
+      "via": "ORAL"
+    },
+    {
+      "name": "ROSUVITAE 20 MG TABLETAS RECUBIERTAS",
+      "via": "ORAL"
+    },
+    {
+      "name": "TRIMEBUTINA MALEATO 200 MG.",
+      "via": "ORAL"
+    }
+  ]

@@ -22,9 +22,8 @@ class CreatePrescriptionsTable extends Migration
             $table->foreign('patient_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('medic_id');
             $table->foreign('medic_id')->references('id')->on('users')->onDelete('cascade');
-            $table->dateTime('interval');
+            $table->tinyInteger('interval');
             $table->dateTime('duration');
-            $table->boolean('taken')->default(true);
             $table->boolean('finished')->default(false);
             $table->timestamps();
         });

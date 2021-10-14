@@ -14,16 +14,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+/*Route::middleware('auth:passport')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
 
 Route::post('login', 'AuthController@login');
 Route::post('register','UserController@store');
 
 Route::group(['middleware' => 'auth:api'], function() {
-    //User routes
-      Route::get('user', 'AuthController@user');
-      Route::post('delete','UserController@destroy');
-      Route::post('update','UserController@update');
+    Route::get('getUser', 'AuthController@user');
+    Route::get('getPrescriptions','PrescriptionController@index');
+    Route::post('logout','AuthController@logout');
+    Route::group(['middleware' => ['role:Medic']], function () {
+        Route::get('users','UserController@index');
+        Route::post('deleteUser','UserController@destroy');
+        Route::post('updateUser','UserController@update');
+        Route::post('storePrescription','PrescriptionController@store');
+        Route::post('updatePrescription','PrescriptionController@update');
+        Route::post('deletePrescription','PrescriptionController@destroy');
+    });
 });

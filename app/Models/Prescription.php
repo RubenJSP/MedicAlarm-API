@@ -20,7 +20,35 @@ class Prescription extends Model
         'medic_id',
         'interval',
         'duration',
-        'description',
         'finished',
     ];
+
+    /**
+     * Get the patient that owns the Prescription
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function patient()
+    {
+        return $this->belongsTo(User::class, 'patient_id');
+    }
+     /**
+     * Get the patient that owns the Prescription
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function medic()
+    {
+        return $this->belongsTo(User::class, 'medic_id');
+    }
+    /**
+     * Get the patient that owns the Prescription
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function medicament()
+    {
+        return $this->belongsTo(Medicament::class, 'medicament_id');
+    }
+    
 }

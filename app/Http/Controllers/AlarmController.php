@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Key;
+use App\Models\Alarm;
 use Illuminate\Http\Request;
 
-class KeyController extends Controller
+class AlarmController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class KeyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Key  $key
+     * @param  \App\Models\Alarm  $alarm
      * @return \Illuminate\Http\Response
      */
-    public function show(Key $key)
+    public function show(Alarm $alarm)
     {
         //
     }
@@ -52,10 +52,10 @@ class KeyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Key  $key
+     * @param  \App\Models\Alarm  $alarm
      * @return \Illuminate\Http\Response
      */
-    public function edit(Key $key)
+    public function edit(Alarm $alarm)
     {
         //
     }
@@ -64,10 +64,10 @@ class KeyController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Key  $key
+     * @param  \App\Models\Alarm  $alarm
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Key $key)
+    public function update(Request $request, Alarm $alarm)
     {
         //
     }
@@ -75,10 +75,10 @@ class KeyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Key  $key
+     * @param  \App\Models\Alarm  $alarm
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Key $key)
+    public function destroy(Alarm $alarm)
     {
         //
     }
