@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Key;
 use Auth;
@@ -50,26 +51,35 @@ class UserController extends Controller
 
         if ($validator->fails())
             return response()->json(['data' => $validator->errors()], 401);
-
-        if($user = User::create($request->all())){
-            $key = Key::where('key',$request['key'])->first();
-            if($key){
-                $user['hospital'] = $key['hospital'];
-                $user->assignRole('Medic');
+        $user = [];
+        DB::beginTransaction();
+        try {
+            if($user = User::create($request->all())){
+                $key = Key::where('key',$request['key'])->first();
+                if($key){
+                    $user['hospital'] = $key['hospital'];
+                    $user->assignRole('Medic');
+                }
+                else{
+                    $user->assignRole('Patient');
+                    $user['code'] = strtoupper(substr($user['name'],0,3).substr($user['lastname'],0,2)."-".substr(hash('sha256',$user['id']),0,5));
+                }
+    
+                $user->password =  Hash::make($request['password']);
+                $user->save();
+                $user->sendEmailVerificationNotification();
             }
-            else{
-                $user->assignRole('Patient');
-                $user['code'] = strtoupper(substr($user['name'],0,3).substr($user['lastname'],0,2)."-".substr(hash('sha256',$user['id']),0,5));
-            }
-
-            $user->password =  Hash::make($request['password']);
-            $user->save();
-            return response()->json([
-                'message' => "Usuario creado correctamente",
-                'data' => $user
-            ], 200);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            //return response()->json(['data' => "No se pudo crear la cuenta, intente nuevamente"], 500);
+            return $e;
         }
-        return response()->json(['data' => "No se pudo crear la cuenta, intente nuevamente"], 500);
+        return response()->json([
+            'message' => "Su cuenta se ha creado, en breve se le enviará un correo de activación.
+            Si no ha recibido ningún correo verifique su casillero de SPAM",
+            'data' => $user
+        ], 200);
     }
 
     /**

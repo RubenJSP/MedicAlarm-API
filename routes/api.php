@@ -18,19 +18,20 @@ use Illuminate\Support\Facades\Route;
     return $request->user();
 });*/
 
-Route::post('login', 'AuthController@login');
 Route::post('register','UserController@store');
-
-Route::group(['middleware' => 'auth:api'], function() {
-    Route::get('getUser', 'AuthController@user');
-    Route::get('getPrescriptions','PrescriptionController@index');
-    Route::post('logout','AuthController@logout');
-    Route::group(['middleware' => ['role:Medic']], function () {
-        Route::get('users','UserController@index');
-        Route::post('deleteUser','UserController@destroy');
-        Route::post('updateUser','UserController@update');
-        Route::post('storePrescription','PrescriptionController@store');
-        Route::post('updatePrescription','PrescriptionController@update');
-        Route::post('deletePrescription','PrescriptionController@destroy');
+Route::post('login', 'AuthController@login');
+Route::group(['middleware' => ['verified']], function () {
+    Route::group(['middleware' => 'auth:api'], function() {
+        Route::get('getUser', 'AuthController@user');
+        Route::get('getPrescriptions','PrescriptionController@index');
+        Route::post('logout','AuthController@logout');
+        Route::group(['middleware' => ['role:Medic']], function () {
+            Route::get('users','UserController@index');
+            Route::post('deleteUser','UserController@destroy');
+            Route::post('updateUser','UserController@update');
+            Route::post('storePrescription','PrescriptionController@store');
+            Route::post('updatePrescription','PrescriptionController@update');
+            Route::post('deletePrescription','PrescriptionController@destroy');
+        });
     });
 });

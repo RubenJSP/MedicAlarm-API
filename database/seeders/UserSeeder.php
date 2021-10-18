@@ -15,17 +15,17 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::create([
+        /*$user = User::create([
         	'name' => 'Apu',
             'lastname' => 'Nahasapeemapetilon',
-        	'email' => 'admin@med.com',
+        	'email' => 'geneticspartan01@gmail.com',
             'professional_id' => 'MED-001',
             'speciality' => 'General',
             'phone' => '6121457878',
         	'password' => Hash::make('secret')
         ]);
-        $user->assignRole('Medic');
-        $user = User::create([
+        $user->assignRole('Medic');*/
+        /*$user = User::create([
         	'name' => 'Dr',
             'lastname' => 'Nick',
         	'email' => 'nick@med.com',
@@ -74,6 +74,6 @@ class UserSeeder extends Seeder
         ]);
         $user['code'] = strtoupper(substr($user['name'],0,3).substr($user['lastname'],0,2)."-".substr(hash('sha256',$user['id']),0,5));
         $user->assignRole('Patient');
-        $user->save();
+        $user->save();*/
     }
 }

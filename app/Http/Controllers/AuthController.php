@@ -28,15 +28,20 @@ class AuthController extends Controller
             'password' => 'required|string',
             'remember_me' => 'boolean'
         ]);
-
         $credentials = request(['email', 'password']);
         if(!Auth::attempt($credentials)){
             return response()->json([
-                'message' => 'No Autorizado',
+                'message' => 'Las credenciales expiraron o no son correctas.',
             ], 401);
         }
 
         $user = $request->user();
+
+        if(!$user->hasVerifiedEmail())
+            return response()->json([
+                'message' => 'Es necesario que active su cuenta para iniciar sesión.',
+            ], 403);
+            
         $token = $this->createToken($user,$request->remember_me);
 
         return $token;
