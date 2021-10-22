@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Prescription;
 use App\Models\User;
+use App\Events\PrescriptionEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
@@ -51,7 +52,8 @@ class PrescriptionController extends Controller
         ]);
 
         if ($validator->fails())
-            return response()->json(['data' => $validator->errors()], 401);
+            return response()->json(['data' => array_values(json_decode($validator->errors(),true))], 401);
+
         if($prescription = Prescription::create([
             'description' => $request['description'],
             'medicament_id' => $request['medicament'],
@@ -61,6 +63,8 @@ class PrescriptionController extends Controller
             'duration' => Carbon::now()->addDays($request['duration']),
         ])){
             $relationships = Prescription::where('id',$prescription['id'])->with('patient','medic','medicament')->get();
+            //Notificar al paciente de su receta
+            event(new PrescriptionEvent($relationships[0]->patient_id,$relationships->toJson(),'Se ha añadido una nueva receta'));
             return response()->json([
                 'message' => "Se ha creado la receta.",
                 'data' => $relationships
@@ -87,7 +91,7 @@ class PrescriptionController extends Controller
         ]);
         
         if ($validator->fails())
-            return response()->json(['data' => $validator->errors()], 401);
+            return response()->json(['data' => array_values(json_decode($validator->errors(),true))], 401);
    
         $prescription = Prescription::find($request['id']);
         if($prescription['medic_id'] == Auth::user()->id){
@@ -128,7 +132,7 @@ class PrescriptionController extends Controller
         ]);
 
         if ($validator->fails())
-            return response()->json(['data' => $validator->errors()], 401);
+            return response()->json(['data' => array_values(json_decode($validator->errors(),true))], 401);
         
         $prescription = Prescription::find($request['id']);
         if($prescription['medic_id'] == Auth::user()->id){

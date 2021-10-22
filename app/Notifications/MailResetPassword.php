@@ -71,7 +71,7 @@ class MailResetPassword extends Notification
             'email' => $notifiable->getEmailForPasswordReset(),
         ], false)))
         ->line(Lang::get('El enlace para cambiar la contraseña solo estará disponible por :count minutos.', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))
-        ->line(Lang::get('Si no solicitaste el cambio de contraseña, no es necesario que realices ninguna acción'));
+        ->line(Lang::get('Si no solicitaste el cambio de contraseña, ignora este mensaje.'));
     }
 
     /**

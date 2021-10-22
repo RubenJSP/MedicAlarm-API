@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::all();
+        return Auth::user();
     }
     /**
      * Display the specified resource.
@@ -50,7 +50,7 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails())
-            return response()->json(['data' => $validator->errors()], 401);
+            return response()->json(['data' => array_values(json_decode($validator->errors(),true))], 401);
         $user = [];
         DB::beginTransaction();
         try {
@@ -76,8 +76,8 @@ class UserController extends Controller
             return $e;
         }
         return response()->json([
-            'message' => "Su cuenta se ha creado, en breve se le enviará un correo de activación.
-            Si no ha recibido ningún correo verifique su casillero de SPAM",
+            'message' => "Te damos la bienvenida a MedicAlarm, en breve se le enviará un correo de activación.
+            Si no ha recibido ningún correo verifique su bandeja de SPAM",
             'data' => $user
         ], 200);
     }
@@ -101,7 +101,7 @@ class UserController extends Controller
             'professional_id' => ['sometimes','string','min:3','max:20','unique:users'],
         ]);
         if ($validator->fails())
-            return response()->json(['data' => $validator->errors()], 401);
+            return response()->json(['data' => array_values(json_decode($validator->errors(),true))], 401);
 
         if($request->has('password'))
             $request['password'] = Hash::make($request['password']); 
@@ -109,8 +109,6 @@ class UserController extends Controller
         if(Auth::user()->getRoleNames()[0] == 'Patient')
             $request->only(['name', 'lastname', 'email','password','phone']);
 
-        if ($validator->fails())
-            return response()->json(['data' => $validator->errors()], 401);
         if(User::find(Auth::user()->id)->update($request->all())){
             $updated = User::find(Auth::user()->id);
             return response()->json([
@@ -121,6 +119,10 @@ class UserController extends Controller
         }
 
         return response()->json(['message' => 'No se ha actualizado la información, intente nuevamente.'], 401);
+        
+    }
+
+    public function recoveryAccount(){
         
     }
 
