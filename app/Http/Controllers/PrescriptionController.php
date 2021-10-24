@@ -94,29 +94,31 @@ class PrescriptionController extends Controller
             return response()->json(['data' => array_values(json_decode($validator->errors(),true))], 401);
    
         $prescription = Prescription::find($request['id']);
-        if($prescription['medic_id'] == Auth::user()->id){
-            if($prescription->update($request->except('duration'))){
-                if($request->has('duration')){
-                    $prescription['duration'] = Carbon::parse($prescription['duration'])->addDays(abs($request['duration']));
-                    $prescription->save();
-                }
-                if($request->has('patient')){
-                    $prescription['patient_id'] = User::where('code',$request['patient'])->pluck('id')[0];
-                    $prescription->save();
-                }
-                $relationships = Prescription::where('id',$request['id'])->with('patient','medic','medicament')->get();
-                return response()->json([
-                    'message' => "Se ha actualizado la receta.",
-                    'data' => $relationships
-                ], 200);
-            }
+
+        if($prescription['medic_id'] != Auth::user()->id)
             return response()->json([
-                'message' => "Ha ocurrido un error, no se ha actualizado la receta.",
-            ], 500);
+                'message' => 'Acción no autorizada',
+            ], 403);
+
+        if($prescription->update($request->except('duration'))){
+            if($request->has('duration')){
+                $prescription['duration'] = Carbon::parse($prescription['duration'])->addDays(abs($request['duration']));
+                $prescription->save();
+            }
+            if($request->has('patient')){
+                $prescription['patient_id'] = User::where('code',$request['patient'])->pluck('id')[0];
+                $prescription->save();
+            }
+            $relationships = Prescription::where('id',$request['id'])->with('patient','medic','medicament')->get();
+            return response()->json([
+                'message' => "Se ha actualizado la receta.",
+                'data' => $relationships
+            ], 200);
         }
         return response()->json([
-            'message' => 'Acción no autorizada',
-        ], 403);
+            'message' => "Ha ocurrido un error, no se ha actualizado la receta.",
+        ], 500);
+    
     }
 
     /**
@@ -135,12 +137,13 @@ class PrescriptionController extends Controller
             return response()->json(['data' => array_values(json_decode($validator->errors(),true))], 401);
         
         $prescription = Prescription::find($request['id']);
-        if($prescription['medic_id'] == Auth::user()->id){
-            if($prescription->delete())
-             return response()->json(['message' => 'Ha eliminado la receta'], 200);
-             else
-                return response()->json(['message' => 'No se ha podido eliminar la receta, intente nuevamente'], 401);
-        }
-        return response()->json(['message' => 'Acción no autorizada'], 403);
+        if($prescription['medic_id'] != Auth::user()->id)
+            return response()->json(['message' => 'Acción no autorizada'], 403);
+        
+        if($prescription->delete())
+            return response()->json(['message' => 'Ha eliminado la receta'], 200);
+
+
+        return response()->json(['message' => 'No se ha podido eliminar la receta, intente nuevamente'], 500);
     }
 }

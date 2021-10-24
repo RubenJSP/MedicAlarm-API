@@ -27,7 +27,7 @@ class ForgotPasswordController extends Controller
     {
         if (request()->header('Content-Type') == 'application/json') {
             return response()->json(['message' => 'Se ha enviado un enlace de recuperación a su correo,
-            si no logra ver el mensaje, revise su casillero de spam.']);
+            si no logra ver el mensaje, revise su bandeja de spam.']);
         }
         return back()->with('status', trans($response));
     }

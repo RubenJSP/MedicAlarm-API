@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use Auth;
 class ContactController extends Controller
 {
     /**
@@ -14,17 +17,10 @@ class ContactController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $contacts = Contact::where('patient_id',Auth::user()->id)->get();
+        return response()->json([
+            'data' => $contacts
+        ], 200);
     }
 
     /**
@@ -35,41 +31,54 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Contact $contact)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Contact $contact)
-    {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => ['required','min:2','max:100','string'],
+            'phone' => ['required','regex:/^\d{10}$/'],
+        ]);
+        if ($validator->fails())
+            return response()->json(['data' => array_values(json_decode($validator->errors(),true))], 400);
+        if($contact = Contact::create($request->all() + ['patient_id' => Auth::user()->id]))
+            return response()->json([
+                'message' => "Hola {$contact->name}!",
+                'data' => $contact
+            ], 200);
+        
+        return response()->json([
+            'message' => 'No se pudo agregar el contacto, intente nuevamente',
+        ], 500);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Contact  $contact
+     * @param  \Illuminate\Http\Request  $request 
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Contact $contact)
+    public function update(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'id' => ['required','exists:contacts,id'],
+            'name' => ['required','min:2','max:100','string'],
+            'phone' => ['required','regex:/^\d{10}$/'],
+        ]);
+        if ($validator->fails())
+            return response()->json(['data' => array_values(json_decode($validator->errors(),true))], 400);
+        $contact = Contact::find($request->id);
+
+        if($contact->patient_id != Auth::user()->id)
+            return response()->json([
+                'message' => 'Alto ahí, esta acción no está autorizada!',
+            ], 403);
+
+        if($contact->update($request->except('id')))
+            return response()->json([
+                'message' => "Se ha actualizado el contacto.",
+                'data' => $contact
+            ], 200);
+
+        return response()->json([
+            'message' => 'No se pudo actualizar el contacto',
+        ], 500);
     }
 
     /**
@@ -80,6 +89,18 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        //
+        if($contact->patient_id != Auth::user()->id)
+            return response()->json([
+                'message' => 'Alto ahí, esta acción no está autorizada!',
+            ], 403);
+
+        $name = $contact->name;
+        if($contact->delete())
+            return response()->json([
+                'message' => "Adiós {$name}!.",
+            ], 200);     
+        return response()->json([
+            'message' => 'No se pudo eliminar el contacto solicitado, intente nuevamente',
+        ], 500);
     }
 }

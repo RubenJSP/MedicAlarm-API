@@ -14,9 +14,11 @@ class Alarm extends Model
      * @var string[]
      */
     protected $fillable = [
-        'time',
+        'hour',
         'medicament_id',
-        'patiet_id'
+        'patiet_id',
+        'contact_id',
+        'notify'
     ];
     
 }

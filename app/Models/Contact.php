@@ -16,5 +16,16 @@ class Contact extends Model
     protected $fillable = [
         'name',
         'phone',
+        'patient_id'
     ];
+
+    /**
+     * Get the patient that owns the Contact
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function patient()
+    {
+        return $this->belongsTo(User::class, 'patient_id');
+    }
 }

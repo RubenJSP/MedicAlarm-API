@@ -24,17 +24,29 @@ Route::post('password/email','Auth\ForgotPasswordController@sendResetLinkEmail')
 Route::group(['middleware' => ['verified']], function () {
     //Rutas de médico y paciente
     Route::group(['middleware' => 'auth:api'], function() {
-        Route::get('getUser', 'AuthController@user');
-        Route::get('getPrescriptions','PrescriptionController@index');
+        //Cerrar la sesión activa
         Route::post('logout','AuthController@logout');
-        Route::post('updateUser','UserController@update');
-        Route::get('users','UserController@index');
-        Route::post('deleteUser','UserController@destroy');
+
+        //Rutas del usuario
+        Route::get('user', 'AuthController@user');
+        Route::put('user','UserController@update');
+        Route::delete('user','UserController@destroy');
+
+        //Obtener todas las recetas [medico o paciente]
+        Route::get('prescription','PrescriptionController@index');
+
+        //Contactos
+        Route::get('contact','ContactController@index');
+        Route::post('contact','ContactController@store');
+        Route::put('contact','ContactController@update');
+        Route::delete('contact/{contact}','ContactController@destroy');
+
         //Rutas del médico
         Route::group(['middleware' => ['role:Medic']], function () {
-            Route::post('storePrescription','PrescriptionController@store');
-            Route::post('updatePrescription','PrescriptionController@update');
-            Route::post('deletePrescription','PrescriptionController@destroy');
+            //Rutas de recetas
+            Route::post('prescription','PrescriptionController@store');
+            Route::put('prescription','PrescriptionController@update');
+            Route::delete('prescription','PrescriptionController@destroy');
         });
     });
 });
