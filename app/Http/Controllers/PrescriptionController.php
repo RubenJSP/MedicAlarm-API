@@ -52,7 +52,7 @@ class PrescriptionController extends Controller
         ]);
 
         if ($validator->fails())
-            return response()->json(['data' => array_values(json_decode($validator->errors(),true))], 401);
+            return response()->json(['data' => array_values(json_decode($validator->errors(),true))], 400);
 
         if($prescription = Prescription::create([
             'description' => $request['description'],
@@ -64,12 +64,16 @@ class PrescriptionController extends Controller
         ])){
             $relationships = Prescription::where('id',$prescription['id'])->with('patient','medic','medicament')->get();
             //Notificar al paciente de su receta
-            event(new PrescriptionEvent($relationships[0]->patient_id,$relationships->toJson(),'Se ha añadido una nueva receta'));
+            //event(new PrescriptionEvent($relationships[0]->patient_id,$relationships->toJson(),'Se ha añadido una nueva receta'));
             return response()->json([
                 'message' => "Se ha creado la receta.",
                 'data' => $relationships
             ], 200);
         }
+
+        return response()->json([
+            'message' => "Algio saió mal, intente nuevamente.",
+        ], 500);
 
     }
     /**
@@ -91,7 +95,7 @@ class PrescriptionController extends Controller
         ]);
         
         if ($validator->fails())
-            return response()->json(['data' => array_values(json_decode($validator->errors(),true))], 401);
+            return response()->json(['data' => array_values(json_decode($validator->errors(),true))], 400);
    
         $prescription = Prescription::find($request['id']);
 
@@ -127,16 +131,8 @@ class PrescriptionController extends Controller
      * @param  \App\Models\Prescription  $prescription
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Prescription $prescription)
     {
-        $validator = Validator::make($request->all(), [
-            'id' =>  ['required','numeric','exists:prescriptions,id'],
-        ]);
-
-        if ($validator->fails())
-            return response()->json(['data' => array_values(json_decode($validator->errors(),true))], 401);
-        
-        $prescription = Prescription::find($request['id']);
         if($prescription['medic_id'] != Auth::user()->id)
             return response()->json(['message' => 'Acción no autorizada'], 403);
         

@@ -23,12 +23,20 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param   id  $patient
+     * @param   code  $code
      * @return \Illuminate\Http\Response
      */
     public function show($code)
     {
-        $patient = User::where('code',$code)->firts();
+    
+        $patient = User::where('code',$code)->first();
+
+        if($patient)
+            return response()->json(['data' => $patient], 200);
+
+        return response()->json([
+            'message' => 'No hay resultados para esta búsqueda',
+        ], 404);
     }
 
     /**
@@ -134,7 +142,7 @@ class UserController extends Controller
      */
     public function destroy()
     {
-        $user = User::find(Auth::user()->id);
+        $user = Auth::user();
         if($user->delete())
             return response()->json(['message' => 'Ha eliminado su cuenta'], 200);
         

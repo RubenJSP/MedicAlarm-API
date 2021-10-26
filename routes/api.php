@@ -18,10 +18,12 @@ use Illuminate\Support\Facades\Route;
 //Rutas públicas
 Route::post('register','UserController@store');
 Route::post('login', 'AuthController@login');
-Route::post('password/email','Auth\ForgotPasswordController@sendResetLinkEmail');
+
 
 //Rutas solo accesibles si la cuenta está verificada
 Route::group(['middleware' => ['verified']], function () {
+    //Recuperación de contraseña
+    Route::post('password/email','Auth\ForgotPasswordController@sendResetLinkEmail');
     //Rutas de médico y paciente
     Route::group(['middleware' => 'auth:api'], function() {
         //Cerrar la sesión activa
@@ -29,6 +31,7 @@ Route::group(['middleware' => ['verified']], function () {
 
         //Rutas del usuario
         Route::get('user', 'AuthController@user');
+        Route::get('user/{code}', 'UserController@show');
         Route::put('user','UserController@update');
         Route::delete('user','UserController@destroy');
 
@@ -40,13 +43,19 @@ Route::group(['middleware' => ['verified']], function () {
         Route::post('contact','ContactController@store');
         Route::put('contact','ContactController@update');
         Route::delete('contact/{contact}','ContactController@destroy');
-
+        
         //Rutas del médico
         Route::group(['middleware' => ['role:Medic']], function () {
             //Rutas de recetas
             Route::post('prescription','PrescriptionController@store');
             Route::put('prescription','PrescriptionController@update');
-            Route::delete('prescription','PrescriptionController@destroy');
+            Route::delete('prescription/{prescription}','PrescriptionController@destroy');
+            //Rutas de medicamento
+            Route::get('medicament','MedicamentController@index');
+            Route::get('medicament/{query}','MedicamentController@show');
+            Route::post('medicament','MedicamentController@store');
+            Route::put('medicament','MedicamentController@update');
+            Route::delete('medicament/{medicament}','MedicamentController@destroy');
         });
     });
 });

@@ -17,4 +17,5 @@ class Medicament extends Model
         'name',
         'via',
     ];
+
 }
