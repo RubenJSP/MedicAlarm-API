@@ -44,11 +44,11 @@ class PrescriptionController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'description' => ['required','min:4','max:1000'],
+            'description' => ['sometimes','required','min:4','max:1000'],
             'medicament' => ['required','numeric','exists:medicaments,id'],
             'patient' => ['required','string','exists:users,code'],
             'interval' => ['required','numeric'],
-            'duration' => ['required','numeric'],
+            'duration' => ['required','date'],
         ]);
 
         if ($validator->fails())
@@ -60,7 +60,7 @@ class PrescriptionController extends Controller
             'patient_id' => User::where('code',$request['patient'])->pluck('id')[0],
             'medic_id' => Auth::user()->id,
             'interval' => $request['interval'],
-            'duration' => Carbon::now()->addDays($request['duration']),
+            'duration' => Carbon::parse($request['duration']),
         ])){
             $relationships = Prescription::where('id',$prescription['id'])->with('patient','medic','medicament')->get();
             //Notificar al paciente de su receta
@@ -91,7 +91,7 @@ class PrescriptionController extends Controller
             'medicament_id' => ['sometimes','required','numeric','exists:medicaments,id'],
             'patient' => ['sometimes','required','exists:users,code'],
             'interval' => ['sometimes','required','numeric'],
-            'duration' => ['sometimes','required','numeric'],
+            'duration' => ['sometimes','required','date'],
         ]);
         
         if ($validator->fails())
@@ -106,7 +106,7 @@ class PrescriptionController extends Controller
 
         if($prescription->update($request->except('duration'))){
             if($request->has('duration')){
-                $prescription['duration'] = Carbon::parse($prescription['duration'])->addDays(abs($request['duration']));
+                $prescription['duration'] = Carbon::parse($request['duration']);
                 $prescription->save();
             }
             if($request->has('patient')){
