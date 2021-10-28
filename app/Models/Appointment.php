@@ -18,4 +18,34 @@ class Appointment extends Model
         'medic_id',
         'patient_id',
     ];
+
+        /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'day' => 'datetime',
+    ];
+
+
+    /**
+     * Get the patient that owns the Appointment
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function patient()
+    {
+        return $this->belongsTo(User::class, 'patient_id');
+    }
+
+    /**
+     * Get the medic that owns the Appointment
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function medic()
+    {
+        return $this->belongsTo(User::class, 'medic_id');
+    }
 }

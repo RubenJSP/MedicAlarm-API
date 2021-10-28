@@ -44,6 +44,17 @@ Route::group(['middleware' => ['verified']], function () {
         Route::put('contact','ContactController@update');
         Route::delete('contact/{contact}','ContactController@destroy');
         
+        //Citas
+        Route::get('appointment','AppointmentController@index');
+        Route::post('appointment','AppointmentController@store');
+        Route::put('appointment','AppointmentController@update');
+        Route::delete('appointment/{appointment}','AppointmentController@destroy');
+
+        //Alarmas
+        Route::get('alarm','AlarmController@index');
+        Route::post('alarm','AlarmController@store');
+        Route::put('alarm','AlarmController@update');
+        Route::delete('alarm/{alarm}','AlarmController@destroy');
         //Rutas del médico
         Route::group(['middleware' => ['role:Medic']], function () {
             //Rutas de recetas

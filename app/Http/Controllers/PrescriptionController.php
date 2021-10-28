@@ -48,7 +48,7 @@ class PrescriptionController extends Controller
             'medicament' => ['required','numeric','exists:medicaments,id'],
             'patient' => ['required','string','exists:users,code'],
             'interval' => ['required','numeric'],
-            'duration' => ['required','date'],
+            'duration' =>  ['required','date',"after_or_equal:".Carbon::now()->format('d-m-Y')],
         ]);
 
         if ($validator->fails())
@@ -91,7 +91,7 @@ class PrescriptionController extends Controller
             'medicament_id' => ['sometimes','required','numeric','exists:medicaments,id'],
             'patient' => ['sometimes','required','exists:users,code'],
             'interval' => ['sometimes','required','numeric'],
-            'duration' => ['sometimes','required','date'],
+            'duration' =>  ['required','date',"after_or_equal:".Carbon::now()->format('d-m-Y')],
         ]);
         
         if ($validator->fails())
