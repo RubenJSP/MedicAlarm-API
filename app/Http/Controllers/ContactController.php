@@ -39,7 +39,7 @@ class ContactController extends Controller
             return response()->json(['data' => array_values(json_decode($validator->errors(),true))], 400);
         if($contact = Contact::create($request->all() + ['patient_id' => Auth::user()->id]))
             return response()->json([
-                'message' => "Hola {$contact->name}!",
+                'message' => "Has añadido a {$contact->name}",
                 'data' => $contact
             ], 200);
         

@@ -46,14 +46,12 @@ Route::group(['middleware' => ['verified']], function () {
         
         //Citas
         Route::get('appointment','AppointmentController@index');
-        Route::post('appointment','AppointmentController@store');
-        Route::put('appointment','AppointmentController@update');
-        Route::delete('appointment/{appointment}','AppointmentController@destroy');
 
         //Alarmas
         Route::get('alarm','AlarmController@index');
+        Route::get('alarm/off/{alarm}','AlarmController@turnOff');
         Route::post('alarm','AlarmController@store');
-        Route::put('alarm','AlarmController@update');
+        //Route::put('alarm','AlarmController@update');
         Route::delete('alarm/{alarm}','AlarmController@destroy');
         //Rutas del médico
         Route::group(['middleware' => ['role:Medic']], function () {
@@ -67,6 +65,17 @@ Route::group(['middleware' => ['verified']], function () {
             Route::post('medicament','MedicamentController@store');
             Route::put('medicament','MedicamentController@update');
             Route::delete('medicament/{medicament}','MedicamentController@destroy');
+            //Citas
+            Route::post('appointment','AppointmentController@store');
+            Route::put('appointment','AppointmentController@update');
+            Route::delete('appointment/{appointment}','AppointmentController@destroy');
+            //Pacientes
+            Route::get('patient','PatientController@index');
+            Route::get('patient/{patient}','PatientController@show');
+            Route::post('patient','PatientController@store');
+            Route::put('patient','PatientController@update');
+            Route::delete('patient/{patient}','PatientController@destroy');
+
         });
     });
 });

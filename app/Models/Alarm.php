@@ -14,11 +14,23 @@ class Alarm extends Model
      * @var string[]
      */
     protected $fillable = [
-        'hour',
-        'medicament_id',
-        'patiet_id',
+        'description',
+        'days',
+        'frecuency',
+        'next_alarm',
+        'end_date',
+        'patient_id',
         'contact_id',
         'notify'
     ];
-    
+
+    /**
+     * Get the contact that owns the Alarm
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function contact()
+    {
+        return $this->belongsTo(User::class, 'contact_id');
+    }
 }

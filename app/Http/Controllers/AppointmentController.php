@@ -75,7 +75,6 @@ class AppointmentController extends Controller
             'day' => ['sometimes','required','date','after_or_equal:'.Carbon::now()],
             //'clinic' => ['required', 'string']
         ]);
-        //return Carbon::parse($request->day)->format('H:i A');
         if ($validator->fails())
             return response()->json(['data' => array_values(json_decode($validator->errors(),true))], 400);
                 //Validar que no se agenden citas a la misma hora y día

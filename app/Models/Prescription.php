@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Prescription extends Model
 {
+    use \Awobaz\Compoships\Compoships;
     use HasFactory;
      /**
      * The attributes that are mass assignable.
