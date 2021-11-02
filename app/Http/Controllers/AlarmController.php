@@ -55,13 +55,16 @@ class AlarmController extends Controller
             'description'=> $request->description,
             'days'=> $request->days,
             'frecuency'=> $request->frecuency,
-            'next_alarm'=> Carbon::parse($request->next_alarm),
+            'next_alarm'=> Carbon::parse($request->next_alarm)->addMinutes($request->frecuency),
             'end_date' => Carbon::parse($request->next_alarm)->addDays($request->days),
             'patient_id'=> Auth::user()->id,
             'contact_id'=> $request->contact_id,
             'notify'=> $request->notify,
         ])){
-            return response()->json(['data' => $alarm], 200);
+            return response()->json([
+                'message' => "La alarma sonará a las {$alarm->next_alarm->format('H:i A')}",
+                'data' => $alarm
+            ], 200);
         }
     }
 
