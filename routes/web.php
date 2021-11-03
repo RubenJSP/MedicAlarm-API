@@ -17,9 +17,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('contacts',function(){
-    $contacts = App\Models\Alarm::with('contact.patient')->get();
-    dd($contacts);
-});
 Auth::routes(['verify' => true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
