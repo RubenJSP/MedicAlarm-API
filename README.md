@@ -11,10 +11,11 @@ API para el proyecto MedicAlarm de la materia Desarrollo de un Proyecto de Softw
 
 ## How To Run
 Esta aplicacion requiere Node y PHP Composer
-```
-composer install | composer update
-```
+
 En la en la raiz
+```
+composer install o composer update
+```
 ```
 npm install
 ```
