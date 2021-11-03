@@ -4,7 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-
+use App\Jobs\NotifyContact;
 class Kernel extends ConsoleKernel
 {
     /**
@@ -24,9 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function(){
-            echo "Hello \n";
-        })->everyMinute();
+        $schedule->job(new NotifyContact)->everyMinute();
     }
 
     /**

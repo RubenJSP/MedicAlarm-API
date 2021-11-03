@@ -31,6 +31,6 @@ class Alarm extends Model
      */
     public function contact()
     {
-        return $this->belongsTo(User::class, 'contact_id');
+        return $this->belongsTo(Contact::class, 'contact_id');
     }
 }

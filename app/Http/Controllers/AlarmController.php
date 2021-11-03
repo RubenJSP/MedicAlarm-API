@@ -34,7 +34,7 @@ class AlarmController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'days' => ['required','numeric','gt:0'],
+            'days' => ['required','numeric','integer','gt:0'],
             'next_alarm' => ['nullable','date','after_or_equal:'.Carbon::now()->format('d-m-Y H:i')],
             'description' => ['required','string','min:2','max:255'],
             'frecuency' => ['required','numeric','gt:0'],
@@ -68,29 +68,6 @@ class AlarmController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {
-        /*$validator = Validator::make($request->all(), [
-            'id' => ['required','string','exists:alarms,id'],
-            'days' => ['required','numeric','gt:0'],
-            'next_alarm' => ['nullable','date','after_or_equal:'.Carbon::now()->format('d-m-Y H:i')],
-            'description' => ['required','string','min:2','max:255'],
-            'frecuency' => ['required','numeric','gt:0'],
-            'contact_id' => ['required','string','exists:contacts,id'],
-            'notify' => ['required','boolean'],
-        ]);
-        if ($validator->fails())
-            return response()->json(['data' => array_values(json_decode($validator->errors(),true))], 400);
-        if($request->has('contact_id'))
-            if(!Contact::where('patient_id',Auth::user()->id)->where('id',$request->contact_id)->first())
-                return response()->json(['message' => 'Este contacto no se encuentra en su lista'], 404); */
-    }
     /**
      * Turn off alarm and add hours to next notification
      *
