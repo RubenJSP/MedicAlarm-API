@@ -28,5 +28,8 @@ php artisan migrate:fresh --seed
 php artisan serve 
 ```
 ```
+php artisan schedule:work 
+```
+```
 npm run dev
 ```
