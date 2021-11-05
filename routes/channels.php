@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('Prescription.{user_id}', function ($user) {
     return $user;
 });
+Broadcast::channel('Appointment.{user_id}', function ($user) {
+    return $user;
+});
+Broadcast::channel('Patient.{user_id}', function ($user) {
+    return $user;
+});

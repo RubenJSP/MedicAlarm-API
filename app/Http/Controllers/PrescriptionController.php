@@ -64,7 +64,7 @@ class PrescriptionController extends Controller
         ])){
             $relationships = Prescription::where('id',$prescription['id'])->with('patient','medic','medicament')->get();
             //Notificar al paciente de su receta
-            //event(new PrescriptionEvent($relationships[0]->patient_id,$relationships->toJson(),'Se ha añadido una nueva receta'));
+            event(new PrescriptionEvent($relationships[0]->patient_id,$relationships->toJson(),'Se ha añadido una nueva receta'));
             return response()->json([
                 'message' => "Se ha creado la receta.",
                 'data' => $relationships

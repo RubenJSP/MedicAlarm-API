@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Patient;
+use App\Events\PatientEvent;
 use App\Models\Prescription;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -40,14 +41,18 @@ class PatientController extends Controller
             return response()->json(['data' => array_values(json_decode($validator->errors(),true))], 400);
         if(trim($request->alias) == '')
             $request->alias = User::where('code',$request['patient'])->pluck('name')[0];
+        $user = User::where('code',$request['patient'])->first();
         if($patient = Patient::create([
             'alias' => $request->alias,
-            'patient_id' => User::where('code',$request['patient'])->pluck('id')[0],
-            'medic_id' => Auth::user()->id]))
-            return response()->json([
-                'message' => 'Se ha añadido un nuevo paciente',
-                'data' => $patient
-            ], 200);
+            'patient_id' =>  $user->id,
+            'medic_id' => Auth::user()->id])){
+                $message = "El Dr.".Auth::user()->name." te ha añadido a su lista de contactos";
+                event(new PatientEvent($message,$user->id));
+                return response()->json([
+                    'message' => 'Se ha añadido un nuevo paciente',
+                    'data' => $patient
+                ], 200);
+            }
             
         return response()->json([
             'message' => 'No se pudo añadir al paciente, intente nuevamente'

@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class PrescriptionEvent implements ShouldBroadcast
+class PatientEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -19,14 +19,11 @@ class PrescriptionEvent implements ShouldBroadcast
      *
      * @return void
      */
-
-    public $prescription;
     public $id;
     public $message;
-    public function __construct($id,$prescription,$message)
+    public function __construct($message,$id)
     {
         $this->id = $id;
-        $this->prescription = $prescription;
         $this->message = $message;
     }
 
@@ -37,9 +34,9 @@ class PrescriptionEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('Prescription.'.$this->id);
+        return new PrivateChannel('Patient.'.$this->id);
     }
-    /**
+        /**
      * Get the data to broadcast.
      *
      * @return array
@@ -58,6 +55,7 @@ class PrescriptionEvent implements ShouldBroadcast
      */
     public function broadcastAs()
     {
-        return 'prescription';
+        return 'patient';
     }
+
 }

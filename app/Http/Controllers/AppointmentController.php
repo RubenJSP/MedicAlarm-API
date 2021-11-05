@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Events\AppointmentEvent;
 use App\Events\PrescriptionEvent;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Auth;
 class AppointmentController extends Controller
@@ -46,19 +48,29 @@ class AppointmentController extends Controller
         //Validar que no se agenden citas a la misma hora y día
         if($this->compareDates($request->day))
             return response()->json([ 'message' => "Ya existe una cita agendada a esta fecha y hora"], 400);
-        $appointment = Appointment::where('medic_id',Auth::user()->id);
-        $request->patient = User::where('code',$request->patient)->pluck('id')[0];
-        if($appointment = Appointment::create([
-            'patient_id' => $request->patient,
-            'medic_id' => Auth::user()->id,
-            'day' => $request->day])){
-                //event(new PrescriptionEvent());
-                return response()->json(['data' => $appointment->with('medic')->get], 200);
-            }
 
+        try {
+            DB::beginTransaction();
+            $appointment = Appointment::where('medic_id',Auth::user()->id);
+            $request->patient = User::where('code',$request->patient)->pluck('id')[0];
+            if($appointment = Appointment::create([
+                'patient_id' => $request->patient,
+                'medic_id' => Auth::user()->id,
+                'day' => $request->day])){
+                    $fecha = Carbon::parse($request->day);
+                    $fecha->settings(['toStringFormat' => 'l j \o\f F Y H:i A']);
+                    $message = $this->translate($fecha,false);
+                    event(new AppointmentEvent($message,$request->patient));
+                    DB::commit();
+                    return response()->json(['data' => $appointment->with('medic')->get()], 200);
+                }    
+        } catch (Exception $e) {
+            DB::rollback();
             return response()->json([
                 'message' => "Algio saió mal, intente nuevamente.",
-            ], 500);
+            ], 500);      
+        }
+        
     }
     /**
      * Update the specified resource in storage.
@@ -85,8 +97,11 @@ class AppointmentController extends Controller
         }
 
         $appointment = Appointment::find($request->id);
-        if($appointment->update($request->except('id')))
+        if($appointment->update($request->except('id'))){
+            $message = "Cita actualizada con el Dr.".Auth::user()->name;
+            event(new AppointmentEvent($message,$appointment->patient->id));
             return response()->json(['data' => $appointment->with('patient')->get()], 200);
+        }
         
 
         return response()->json([
@@ -124,4 +139,32 @@ class AppointmentController extends Controller
         }
         return false;
     }
+    private function translate($date){
+        $msg = explode(' ',$date);
+        $day = [
+        'Monday'=>'Lunes',
+        'Tuesday'=>'Martes',
+        'Wednesday'=>'Miércoles',
+        'Thursday'=>'Jueves',
+        'Friday'=>'Viernes',
+        'Saturday'=>'Sábado',
+        'Sunday'=>'Domingo'
+        ];
+        $month = [
+        'January'=>'Enero',
+        'February'=>'Febrero',
+        'March'=>'Marzo',
+        'April'=>'Abril',
+        'May'=>'Mayo',
+        'June'=>'Junio',
+        'July'=>'Julio',
+        'August'=>'Agosto',
+        'September'=>'Septiembre',
+        'October'=>'Octubre',
+        'November'=>'Noviembre',
+        'December'=>'Diciembre'
+        ]; 
+        return "Cita agendada el {$day[$msg[0]]} {$msg[1]} de {$month[$msg[3]]} del {$msg[4]} a las {$msg[5]} {$msg[6]}";
+    }
 }
+

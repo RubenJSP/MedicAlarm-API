@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class AppointmentEvent
+class AppointmentEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -19,13 +19,11 @@ class AppointmentEvent
      *
      * @return void
      */
-    public $appointment;
     public $id;
     public $message;
-    public function __construct($id,$appointment,$message)
+    public function __construct($message,$id)
     {
         $this->id = $id;
-        $this->appointment = $appointment;
         $this->message = $message;
     }
 
@@ -48,7 +46,7 @@ class AppointmentEvent
     {
         return [
             "message" => $this->message,
-            "data" => $this->appointment
+            "data" => ""
         ];
     }
     /**

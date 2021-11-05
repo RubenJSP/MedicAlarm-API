@@ -24,6 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        //Iniciar el envío de mensajes vía SMS de alarmas atrasadas (se ejecuta cada minuto).
         $schedule->job(new NotifyContact)->everyMinute();
     }
 

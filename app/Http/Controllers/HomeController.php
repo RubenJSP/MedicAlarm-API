@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Appointment;
+use Auth;
 class HomeController extends Controller
 {
     /**
@@ -23,6 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $appointmets = [];
+        if(Auth::user()->getRoleNames()[0] == 'Patient')
+            $appointmets = Appointment::where('patient_id',Auth::user()->id)->with('medic')->get();
+        else
+            $appointmets = Appointment::where('medic_id',Auth::user()->id)->with('patient')->get();
+        return view('home',compact('appointmets'));
     }
 }
