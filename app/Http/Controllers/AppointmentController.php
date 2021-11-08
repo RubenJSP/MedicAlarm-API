@@ -25,7 +25,6 @@ class AppointmentController extends Controller
             $appointment = Appointment::where('patient_id',Auth::user()->id)->with('medic')->get();
         else
             $appointment = Appointment::where('medic_id',Auth::user()->id)->with('patient')->get();
-        //$appointment = Appointment::where();
         return response()->json(['data' => $appointment], 200);
     }
 
