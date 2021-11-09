@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Medicament;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Contracts\Support\Jsonable;
 use Carbon\Carbon;
 use Auth;
 class MedicamentController extends Controller
@@ -16,7 +17,7 @@ class MedicamentController extends Controller
      */
     public function index()
     {
-        $medicaments = Medicament::all();
+        $medicaments = Medicament::paginate();
         return response()->json(['data' => $medicaments], 200);
     }
 
