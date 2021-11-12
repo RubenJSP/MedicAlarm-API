@@ -1,6 +1,6 @@
 # MedicAlarm-API
 API para el proyecto MedicAlarm de la materia Desarrollo de un Proyecto de Software
-<p align="center"><img src="https://laravel.com/img/logomark.min.svg" width="400"></p>
+<p align="center"><img src="https://github.com/ignacioiglesias43/MedicAlarmv2/blob/dev/src/assets/logo.png?raw=true" width="150"></p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
