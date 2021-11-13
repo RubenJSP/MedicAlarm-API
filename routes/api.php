@@ -51,6 +51,7 @@ Route::group(['middleware' => ['verified']], function () {
         Route::get('alarm','AlarmController@index');
         Route::get('alarm/off/{alarm}','AlarmController@turnOff');
         Route::post('alarm','AlarmController@store');
+        Route::put('alarm','AlarmController@update');
         Route::delete('alarm/{alarm}','AlarmController@destroy');
         //Rutas del médico
         Route::group(['middleware' => ['role:Medic']], function () {

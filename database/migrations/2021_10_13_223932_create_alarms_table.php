@@ -24,7 +24,7 @@ class CreateAlarmsTable extends Migration
             $table->foreign('patient_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('contact_id')->nullable();
             $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('cascade');
-            $table->boolean('notify')->default(false);
+            $table->boolean('notify')->default(0);
             $table->timestamps();
         });
     }

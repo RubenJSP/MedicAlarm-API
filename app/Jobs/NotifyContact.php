@@ -46,7 +46,7 @@ class NotifyContact implements ShouldQueue
         }
     }
     public function getAlarms(){
-        return Alarm::with('contact')->get();
+        return Alarm::where('notify',1)->whereDate('end_date','<=',Carbon::now()->format('Y-m-d'))->with('contact')->get();
     }
 
     public function checkHour($alarm){

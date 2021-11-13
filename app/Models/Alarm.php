@@ -25,6 +25,19 @@ class Alarm extends Model
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'frecuency' => 'integer',
+        'patient_id' => 'integer',
+        'contact_id' => 'integer',
+        'notify' => 'integer',
+        'days' => 'integer',
+
+    ];
+    /**
      * Get the contact that owns the Alarm
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
