@@ -90,16 +90,17 @@ class AppointmentController extends Controller
             return response()->json(['data' => array_values(json_decode($validator->errors(),true))], 400);
                 //Validar que no se agenden citas a la misma hora y día
                 if($this->compareDates($request->day))
-                return response()->json([ 'message' => "Ya existe una cita agendada a esta fecha y hora"], 400);
+                    return response()->json([ 'message' => "Ya existe una cita agendada a esta fecha y hora"], 400);
         if($request->has('patient')){
             $request->merge(['patient_id' => User::where('code',$request->patient)->pluck('id')[0]]);
         }
 
         $appointment = Appointment::find($request->id);
         if($appointment->update($request->except('id'))){
+            $data = Appointment::where('id',$request->id)->with('patient')->get();
             $message = "Cita actualizada con el Dr.".Auth::user()->name;
             event(new AppointmentEvent($message,$appointment->patient->id));
-            return response()->json(['data' => $appointment->with('patient')->get()], 200);
+            return response()->json(['data' => $data], 200);
         }
         
 
