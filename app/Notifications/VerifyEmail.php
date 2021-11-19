@@ -50,7 +50,7 @@ class VerifyEmail extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->from('accounts@medicalarm.com', 'MedicAlarm')
+            ->from(env('MAIL_FROM_ADDRESS'), 'MedicAlarm')
             ->greeting("Hola {$this->username}!")
             ->subject(Lang::get('Activa tu cuenta MedicAlarm'))
             ->line(Lang::get('Haga clic en el siguiente botón para activar su cuenta:'))

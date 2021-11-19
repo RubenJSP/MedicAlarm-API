@@ -62,7 +62,7 @@ class MailResetPassword extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->from('recovery@medicalarm.com', 'MedicAlarm')
+        ->from(env('MAIL_FROM_ADDRESS'), 'MedicAlarm')
         ->greeting("Hola {$this->username}!")
         ->subject(Lang::get('Recuperación de contraseña MedicAlarm'))
         ->line(Lang::get('Recibimos una solicitud para cambiar la contraseña de tu cuenta MedicAlarm'))
