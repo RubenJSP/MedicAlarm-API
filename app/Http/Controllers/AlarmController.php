@@ -56,7 +56,7 @@ class AlarmController extends Controller
             'description'=> $request->description,
             'days'=> $request->days,
             'frecuency'=> $request->frecuency,
-            'next_alarm'=> Carbon::parse($request->next_alarm)->addMinutes($request->frecuency),
+            'next_alarm'=> Carbon::parse($request->next_alarm),
             'end_date' => Carbon::parse($request->next_alarm)->addDays($request->days),
             'patient_id'=> Auth::user()->id,
             'contact_id'=> $request->contact_id,
