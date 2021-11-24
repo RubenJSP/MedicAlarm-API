@@ -35,6 +35,7 @@ class Alarm extends Model
         'contact_id' => 'integer',
         'notify' => 'integer',
         'days' => 'integer',
+        'next_alarm' => 'datetime:Y-m-d H:i',
 
     ];
     /**

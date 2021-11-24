@@ -90,9 +90,10 @@ class AlarmController extends Controller
             return response()->json(['data' => array_values(json_decode($validator->errors(),true))], 400);
             $alarm = Alarm::find($request->id);   
             $message = 'Se ha actualizado la alarma';
+                
             try {
                 DB::beginTransaction();
-                if($alarm->update(array_filter($request->except('id')))){
+                    if($alarm->update(array_filter($request->except('id')))){
                     if($request->has('days') )
                         $alarm->end_date = Carbon::parse($alarm->end_date)->addDays($request->days);
 

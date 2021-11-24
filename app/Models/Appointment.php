@@ -25,7 +25,7 @@ class Appointment extends Model
      * @var array
      */
     protected $casts = [
-        'day' => 'datetime',
+        'day' => 'datetime:Y-m-d H:i',
     ];
 
 
