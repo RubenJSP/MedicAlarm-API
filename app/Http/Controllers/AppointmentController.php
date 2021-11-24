@@ -94,10 +94,7 @@ class AppointmentController extends Controller
         if($request->has('patient')){
             $request->merge(['patient_id' => User::where('code',$request->patient)->pluck('id')[0]]);
         }
-
-        if($request->has('day'))
-            $request->day = Carbon::parse($request->day)->format('d-m-y H:i');
-
+        
         $appointment = Appointment::find($request->id);
         if($appointment->update($request->except('id'))){
             $data = Appointment::where('id',$request->id)->with('patient')->get();
