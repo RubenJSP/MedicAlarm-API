@@ -29,7 +29,9 @@ class ForgotPasswordController extends Controller
             return response()->json(['message' => 'Se ha enviado un enlace de recuperación a su correo,
             si no logra ver el mensaje, revise su bandeja de spam.']);
         }
-        return back()->with('status', trans($response));
+        dd($response);
+        return back()->with('status', 'Se ha enviado un enlace de recuperación a su correo,
+        si no logra ver el mensaje, revise su bandeja de spam.');
     }
     protected function sendResetLinkFailedResponse(Request $request, $response)
     {
@@ -37,7 +39,7 @@ class ForgotPasswordController extends Controller
             return response()->json(['message' => 'No se ha podido enviar el correo de recuperación, intente nuevamente.']);
         }
         return back()->withErrors(
-            ['email' => trans($response)]
+            ['email' => 'No se ha podido enviar el correo de recuperación, intente nuevamente.']
         );
     }
 }
