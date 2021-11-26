@@ -54,9 +54,10 @@
         ],
         "post-install-cmd": [
             "php artisan clear-compiled",
-            "chmod -R 777 public/",
-            "npm run prod"
-        ]
+            "chmod -R 777 public/"
+        ],
+        "postinstall": "npm run prod"
+
     },
     "extra": {
         "laravel": {
