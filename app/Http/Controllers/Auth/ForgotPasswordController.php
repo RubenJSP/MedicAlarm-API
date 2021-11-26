@@ -29,7 +29,6 @@ class ForgotPasswordController extends Controller
             return response()->json(['message' => 'Se ha enviado un enlace de recuperación a su correo,
             si no logra ver el mensaje, revise su bandeja de spam.']);
         }
-        dd($response);
         return back()->with('status', 'Se ha enviado un enlace de recuperación a su correo,
         si no logra ver el mensaje, revise su bandeja de spam.');
     }
