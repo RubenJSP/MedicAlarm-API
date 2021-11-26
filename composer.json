@@ -56,7 +56,7 @@
             "php artisan clear-compiled",
             "chmod -R 777 public/"
         ],
-        "postinstall": "npm run prod"
+        "postinstall": "npm run production"
 
     },
     "extra": {
