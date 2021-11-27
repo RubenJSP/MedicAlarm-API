@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Key;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class RegisterController extends Controller
 {
@@ -49,11 +52,15 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+        return $validator = Validator::make($data, [
+            'name' => ['required', 'string', 'min:3','max:255','regex:/[A-Za-z]+/'],
+            'lastname' => ['required', 'string', 'min:3','max:255','regex:/[A-Za-z]+/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string','min:8' ,'max:32'],
+            'phone' => ['required','min:10','max:10','regex:/^\d{10}$/','unique:users'],
+            'key' => ['nullable','exists:keys,key']
         ]);
+
     }
 
     /**
@@ -64,10 +71,38 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        DB::beginTransaction();
+
+        try {
+            $user = User::create([
+                'name' => $data['name'],
+                'lastname' => $data['lastname'],
+                'phone' =>  $data['phone'],
+                'email' => $data['email'],
+                'key' => $data['key'],
+                'password' => Hash::make($data['password']),
+            ]);
+            if($user){
+                if($data['key']!=''){
+                    $key = Key::where('key',$array['key'])->first();
+                    if($key){
+                        $user['hospital'] = $key['hospital'];
+                        $user->assignRole('Medic');
+                    }
+                }else{                   
+                    $user->assignRole('Patient');
+                    $user['code'] = strtoupper(substr($user['name'],0,3).substr($user['lastname'],0,2)."-".substr(hash('sha256',$user['id']),0,5));    
+                }
+                $user->save();
+            }
+            $user->sendEmailVerificationNotification();
+            Session::put('status', "Se ha enviado un enlace de activación a {$data['email']}");
+            DB::commit();
+            return $user;
+        } catch (\Exception $e) {
+           DB::rollback();
+        }
+       
+        return null;
     }
 }

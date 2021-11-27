@@ -6,12 +6,15 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Inicio') }}</div>
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                  <div class="card-body">
+                    @if (session('verified'))
+                    <div class="alert alert-success" role="alert">
+                      <strong>
+                        {{ __('¡Enhorabuena '.Auth::user()->name.'! has activado tu cuenta MedicAlarm.') }}
+                      </strong>
+                        
+                    </div>
+                  @endif
                     @if(Auth::user()->getRoleNames()[0] == 'Medic') 
                         <h1>¡Hola Dr.{{Auth::user()->name}}!</h1>
                         <br>
@@ -59,35 +62,4 @@
         </div>
     </div>
 </div>
-<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-<script>
-    window.user =  {!! json_encode(Auth::user()->id) !!};
-  // Enable pusher logging - don't include this in production
-  Pusher.logToConsole = true;
-
-  var pusher = new Pusher('ddd66dfedf577300368b', {
-    cluster: 'us2',
-    authEndpoint: '/broadcasting/auth',
-    auth: {
-      headers: { "Accept": 'application/json',
-                "Authorization": 'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMzA4ZjE0YzE0ODFlODg3YWEzOTEwZGRmYzZlMTYyYTVkNDRhNjE3NTU5ZGUxYTY0ZDA4NGUzMDBjYmM3MzU0NDNkOTkxNjgyMDc3MDU5ODgiLCJpYXQiOjE2MzU4NzQ5NTUuMjAxMzkxLCJuYmYiOjE2MzU4NzQ5NTUuMjAxMzk3LCJleHAiOjE2Njc0MTA5NTUuMDQyMjYzLCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.PHcUEiGnXXmS8Fye68nPiFV_Tt5RPr0QPKTls-Uvsw2ecOYtEZkjCsfXUeyMqFwla7m488iSliMSGfW2e-kjnAmiwIVRr_YnOKO0yKF8AloWhag10sHgV6WBjGiUNRzx35Rra5yL0SOFpa8OvVaqbIZCY6edXyoOIiaDVQCnW0zd0B2b9B9ljqJ5sirgnwTlM22BxzJXEzcF5L0orlpjHY3eID2906_KwEGSEDil9SKBvUl9kSGxwMW8hQ0idOq3V1j2FYRI5duRoDNHVbsUbjNJcA9xJu8odjkkQKfNGqj1xK8yhzC-UEvESx-_WJzy1J6yHCrBR4n6m892evE25h8eh6e6Xih9cpXoRnpURSY0VVtxzlNXvOxiZLw-N7Vn1Xsumq5B-H35qxb-caZWWt0T3jNtwXHR0-TIH35qQGslUN1mESac6QYtEyA6hHcw88FR3y5wePuZNCKgsfDFuG2tpkjsLOhAHeyj91DpJwnUUGBLhCN1axZTvFJ8sE2sPigA2pzMY3Z4zTz2gX1CjLGZJ5GlWsQ5mE4xr0NekE-JagLXkjETRINVsYvpwimnuwLo9koqXTTG9SiLfH38Ooq4PR2LKcraJZ0PCBcdB1FjwdRhwFN5T2QjMMaA_K_LbskAjat0J7egfJ1am61boUUYirNFrFX_BOhJBM02GyQ'
-       },
-    },
-  });
-
-  var channel = pusher.subscribe('private-Prescription.'+window.user);
-  channel.bind('prescription', function(data) {
-    alert(JSON.stringify(data));
-  });
-  
-  var channel1 = pusher.subscribe('private-Patient.'+window.user);
-  channel1.bind('patient', function(data) {
-    alert(data.message);
-  });
-
-  var channel2 = pusher.subscribe('private-Appointment.'+window.user);
-  channel2.bind('appointment', function(data) {
-    alert(data.message);
-  });
-</script>
 @endsection

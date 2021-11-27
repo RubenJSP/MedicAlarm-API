@@ -57,8 +57,10 @@ class UserController extends Controller
             'key' => ['nullable','exists:keys,key']
         ]);
 
-        if ($validator->fails())
+        if ($validator->fails()){
             return response()->json(['data' => array_values(json_decode($validator->errors(),true))], 401);
+
+        }
         $user = [];
         DB::beginTransaction();
         try {

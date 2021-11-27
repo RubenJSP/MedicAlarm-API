@@ -8,6 +8,18 @@
                 <div class="card-header">{{ __('Iniciar sesión') }}</div>
 
                 <div class="card-body">
+                    @if (\Session::get('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{\Session::get('status') }}
+                        {{\Session::forget('status')}}
+                    </div>
+                @endif
+                @if (\Session::get('error'))
+                <div class="alert alert-warning" role="alert">
+                    {{\Session::get('error') }}
+                    {{\Session::forget('error')}}
+                </div>
+                @endif
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         
