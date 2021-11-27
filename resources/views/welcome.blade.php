@@ -42,4 +42,32 @@
                 </div>
 
     </body>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script>
+        window.user =  '3';
+      // Enable pusher logging - don't include this in production
+      Pusher.logToConsole = true;
+      var pusher = new Pusher('ddd66dfedf577300368b', {
+        cluster: 'us2',
+        authEndpoint: 'https://boiling-wave-64374.herokuapp.com/broadcasting/auth',
+        auth: {
+          headers: { "Accept": 'application/json',
+                    "Authorization": 'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMWU4M2M2YTNjYjRkNmZjZWU1ODU3NjVkZjAxNGYzODg1MThlMDAxZmEwZDJjZGQ5NjFkOGUwNDkyNWE5YzI5ZjAzZTk3NWE4NmQ1NmYyMGUiLCJpYXQiOjE2Mzc5ODA1OTAuMDQ5MTcxLCJuYmYiOjE2Mzc5ODA1OTAuMDQ5MTc1LCJleHAiOjE2Njk1MTY1OTAuMDM5MDk4LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.tIldyITV3uVZF_1tX8kOadMWXr6LU3YGcNxDBcrTZ_2rFIMIwY8L3_AH9lsHQ6Vp8FB9CKKywp11e1fMuZwhIs34mMWEJQ75MAhlaPIyFamINGz4uCJQmWoUBOoKPGgS9iHWdvLStf2fcJirjkIdw9N6zVuNTgDjpp_A3Lh0g4adILd416KtfaH9h36VHHRcRxqXc9BPn6Q3sMxlNjBi2T3G8Ms-trHYIdS9xJ9YN2z9GXPi1rkmbFElsGOBrscJkwVY5OIujiwTYB5Gl9C96zKQJWwmRgGP7Xx2aXqDyFnZjWxT2mcJn3IKXisk_jyaVf68zG5TDuBqvynC6Qlj0Fsk4wjNbxWBT0HBs3WLILptPZGuTmjDggO5NaEIcIpyUpxJWCixq8CTwVq0kR0v3tAJXSttzLAs5ETVr2pxYIJZdpoNd68JO-trIVnbNR1CWRxbTl-HBNTEetQkyCRLoG7LbC4RULKuwa94WcYuhAoDYMxy9CXmYuyWHy6xqGvGSz1TGO_RUSH1AiSwVCA8uDEeQbDiwY-aHgAZQVu7JiU4qqZkO6qYpWKIyeCra0LdY3gKhsiS5eOLnUFIBc7dJ9CWj0-Gpk5oiiLta0L8ddtZilmbLJSNRBW-dvkKIlFFCjZPDD-M4E3fWt1zSnU9TTq7-sL7UOYki8R4Xc5qTgE'
+           },
+        },
+      });
+      var channel = pusher.subscribe('private-Prescription.'+window.user);
+      channel.bind('prescription', function(data) {
+        alert(JSON.stringify(data));
+      });
+      
+      var channel1 = pusher.subscribe('private-Patient.'+window.user);
+      channel1.bind('patient', function(data) {
+        alert(data.message);
+      });
+      var channel2 = pusher.subscribe('private-Appointment.'+window.user);
+      channel2.bind('appointment', function(data) {
+        alert(data.message);
+      });
+    </script>
 </html>
