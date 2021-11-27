@@ -84,7 +84,7 @@ class RegisterController extends Controller
             ]);
             if($user){
                 if($data['key']!=''){
-                    $key = Key::where('key',$array['key'])->first();
+                    $key = Key::where('key',$data['key'])->first();
                     if($key){
                         $user['hospital'] = $key['hospital'];
                         $user->assignRole('Medic');
@@ -103,6 +103,6 @@ class RegisterController extends Controller
            DB::rollback();
         }
        
-        return null;
+         return redirect()->back();
     }
 }
