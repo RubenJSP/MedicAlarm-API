@@ -15,6 +15,7 @@ class NotifyContact implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    private $toleranceInMinutes = 3;
     /**
      * Create a new job instance.
      *
@@ -46,11 +47,11 @@ class NotifyContact implements ShouldQueue
         }
     }
     public function getAlarms(){
-        return Alarm::where('notify',1)->whereDate('end_date','<=',Carbon::now()->format('Y-m-d'))->with('contact')->get();
+        return Alarm::where('notify',1)->whereDate('end_date','>=',Carbon::now()->format('Y-m-d'))->with('contact')->get();
     }
 
     public function checkHour($alarm){
-        $fromAlarm = Carbon::parse($alarm->next_alarm);
+        $fromAlarm = Carbon::parse($alarm->next_alarm)->addMinutes($this->toleranceInMinutes);
         return Carbon::now()->greaterThanOrEqualTo($fromAlarm);
     }
     public function sendSMS($to,$msg){
