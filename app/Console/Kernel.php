@@ -5,6 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Jobs\NotifyContact;
+use App\Jobs\AppointmentReminder;
 class Kernel extends ConsoleKernel
 {
     /**
@@ -26,6 +27,8 @@ class Kernel extends ConsoleKernel
     {
         //Iniciar el envío de mensajes vía SMS de alarmas atrasadas (se ejecuta cada minuto).
         $schedule->job(new NotifyContact)->everyMinute();
+        //Inciar en envío de notificaciones de citas pendientes
+        $schedule->job(new AppointmentReminder)->everyMinute();
     }
 
     /**

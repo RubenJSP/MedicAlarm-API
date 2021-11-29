@@ -19,6 +19,9 @@ Broadcast::channel('Prescription.{user_id}', function ($user) {
 Broadcast::channel('Appointment.{user_id}', function ($user) {
     return $user;
 });
+Broadcast::channel('AppointmentReminder.{user_id}', function ($user) {
+    return $user;
+});
 Broadcast::channel('Patient.{user_id}', function ($user) {
     return $user;
 });
