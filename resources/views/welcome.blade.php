@@ -44,4 +44,17 @@
                 </div>
 
     </body>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script>
+      // Enable pusher logging - don't include this in production
+      Pusher.logToConsole = true;
+      var pusher = new Pusher('ddd66dfedf577300368b', {
+        cluster: 'us2',
+      });
+      var channel = pusher.subscribe('test');
+      channel.bind('nut', function(data) {
+        alert(data.message);
+      });
+      
+    </script>
 </html>

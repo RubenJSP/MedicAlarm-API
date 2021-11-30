@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\Appointment;
 use App\Events\AppointmentReminderEvent;
+use App\Events\test;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -34,6 +35,7 @@ class AppointmentReminder implements ShouldQueue
     public function handle()
     {
         try {
+            event(new test());
             $appointments = $this->getAppointments();
             foreach ($appointments as $appointment) 
                if($this->checkHour($appointment->day))
