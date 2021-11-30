@@ -99,7 +99,7 @@ class AlarmController extends Controller
 
                     if($request->has('frecuency')){
                         $alarm->next_alarm = Carbon::now()->addMinutes($request->frecuency);
-                        $message = "La alarma sonará a las {$alarm->next_alarm->format('H:i A')}";
+                        $message = "Recordatorio a las {$alarm->next_alarm->format('H:i A')}";
                     }
 
                     if(!$alarm->save()){
@@ -133,7 +133,7 @@ class AlarmController extends Controller
                 $alarm->next_alarm = Carbon::parse($alarm->next_alarm)->addMinutes($alarm->frecuency);
                 if($alarm->save()){
                     return response()->json([
-                        'message' => "La alarma sonará a las {$alarm->next_alarm->format('H:i A')}",
+                        'message' => "Recordatorio a las {$alarm->next_alarm->format('H:i A')}",
                         'data' => $alarm
                     ], 200,);
                 }
