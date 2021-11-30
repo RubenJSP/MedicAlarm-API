@@ -130,12 +130,19 @@ class AlarmController extends Controller
      */
     public function turnOff(Alarm $alarm){
         if($alarm->patient_id == Auth::user()->id){
-                $alarm->next_alarm = Carbon::parse($alarm->next_alarm)->addMinutes($alarm->frecuency);
-                if($alarm->save()){
-                    return response()->json([
-                        'message' => "Recordatorio a las {$alarm->next_alarm->format('H:i A')}",
-                        'data' => $alarm
-                    ], 200,);
+                $alarm->next_alarm = Carbon::parse($alarm->next_alarm)->addMinutes($alarm->frecuency);              
+                if($alarm->next_alarm->lte($alarm->end_date)){
+                    if($alarm->save()){
+                        if($alarm->next_alarm->eq($alarm->end_date))
+                            return response()->json([
+                                'message' => "Última dosis de {$alarm->description} a las {$alarm->next_alarm->format('H:i A')}",
+                                'data' => $alarm
+                            ], 200,);
+                        return response()->json([
+                            'message' => "Recordatorio a las {$alarm->next_alarm->format('H:i A')}",
+                            'data' => $alarm
+                        ], 200,);
+                    }
                 }
         }
     }

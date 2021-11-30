@@ -40,13 +40,14 @@ class NotifyContact implements ShouldQueue
                 echo "Notify to {$alarm->contact->name} Alarm at: {$at}\n";
                 $message = "Hola {$alarm->contact->name}, parece que {$alarm->contact->patient->name} ha olvidado la alarma de las {$at} con asunto {$alarm->description}.
                 -El equipo de MedicAlarm.";
-                $this->sendSMS($alarm->contact->phone,$message);
+                //$this->sendSMS($alarm->contact->phone,$message);
                 $alarm->next_alarm = Carbon::now()->addMinutes($alarm->frecuency);
                 $alarm->save();
             }
         }
     }
     public function getAlarms(){
+        $this->clear();
         return Alarm::where('notify',1)->whereDate('end_date','>=',Carbon::now()->format('Y-m-d'))->with('contact')->get();
     }
 
@@ -67,6 +68,13 @@ class NotifyContact implements ShouldQueue
                 echo "Message sent to +52{$to}\n";
         } catch (Exception $e) {
             echo "Error: ".$e->getMessage();
+        }
+    }
+    public function clear(){
+        $alarms = Alarm::all();
+        foreach ($alarms as $alarm) {
+            if(Carbon::now()->gt($alarm->end_date))
+                $alarm->delete();
         }
     }
 }
