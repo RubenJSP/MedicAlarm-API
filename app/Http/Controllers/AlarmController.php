@@ -80,7 +80,7 @@ class AlarmController extends Controller
         $validator = Validator::make($request->all(), [
             'id' => ['required','integer','exists:alarms,id'],
             'days' => ['nullable','numeric','integer','gt:0'],
-            'next_alarm' => ['nullable','date','after_or_equal:'.Carbon::now()->format('d-m-Y H:i')],
+            'next_alarm' => ['nullable','date','after_or_equal:'.Carbon::now()->format('Y-m-d H:i')],
             'description' => ['nullable','string','min:2','max:255'],
             'frecuency' => ['nullable','numeric','gt:0'],
             'contact_id' => ['nullable','integer','exists:contacts,id'],
